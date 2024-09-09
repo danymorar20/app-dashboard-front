@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     publicRuntimeConfig: {
-        apiUrl: process.env.API_URL,
+        apiUrl: process.env.NEXT_PUBLIC_DASHBOARD_BACKEND_URL,
     }
 };
 
