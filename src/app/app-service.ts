@@ -1,10 +1,6 @@
-import getConfig from 'next/config';
-
 export default class AppService {
     // get all environment variables mapped from .env at next config
-    public publicRuntimeConfig = getConfig().publicRuntimeConfig;
-
-    public apiUrl = this.publicRuntimeConfig.apiUrl;
+    public apiUrl = process.env.NEXT_PUBLIC_DASHBOARD_BACKEND_URL;
 
     protected async handleRequest<T>(endpoint: string, options?: RequestInit): Promise<T> {
         try {
