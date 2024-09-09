@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Login } from './interfaces/login.interface';
 import loginService from './login.service';
 import { AccessToken } from '../interfaces/access-token.interface';
@@ -9,6 +9,13 @@ import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const token = Cookies.get('token');
+        token ? router.push('../dashboard') : setLoading(false);
+    }, [router]);
+
     const [credentials, setCredentials] = useState<Login>({
         email: "",
         password: "",
@@ -36,6 +43,8 @@ export default function LoginPage() {
         }
     }
 
+    //TODO: AGREGAR PANTALLAS DE CARGA Y REDIRECCION PERSONALIZADAS
+    if (loading) return <p>Cargando...</p>;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm">
